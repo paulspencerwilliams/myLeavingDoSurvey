@@ -1,6 +1,13 @@
 language: scala
 jdk:
-  - openjdk6
+- openjdk6
 scala:
-   - 2.10.3
+- 2.10.3
 script: sbt test
+deploy:
+  provider: heroku
+  api_key:
+    secure: JUhXoidCYC3o+Z0uFP7VKHc9IWc/SdZOF8CkYHMIscFvE5vdWxG2j7KgVrwg4F8/ZGmoqq0htBGqVRmXytvXqsP3cm2bX+Godt1xozAAeLrLI5lw8SRWI+a92WXQPX34ZBssjlHJQTvDDDSn3eNBqKq7VMw8swHYW9cN4CMCoQk=
+  app: myLeavingDoSurvey
+  on:
+    repo: paulspencerwilliams/myLeavingDoSurvey

@@ -1,0 +1,15 @@
+@(acceptanceForm: Form[Acceptance])
+@import helper._
+@main("What ya want to do?") {
+@form(action = routes.Application.accept()) {
+  @inputText(acceptanceForm("name"))
+  @repeat(acceptanceForm("availabilities")) { availability => 
+    <li>@checkbox(availability("available"), '_label -> availability("date").value)</li>
+  }
+  @repeat(acceptanceForm("activities")) { activity => 
+    <li>@checkbox(activity("acceptable"), '_label -> activity("name").value)</li>
+  }
+  <button type="submit" name="save" value="save">Save</button>
+  }
+}
+

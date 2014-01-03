@@ -2,14 +2,24 @@
 @import helper._
 @main("What ya want to do?") {
 @form(action = routes.Application.accept()) {
-  @inputText(acceptanceForm("name"))
-  @repeat(acceptanceForm("availabilities")) { availability => 
-    <li>@checkbox(availability("available"), '_label -> availability("date").value)</li>
+<fieldset>
+@inputText(acceptanceForm("name"), '_label -> "Your name")
+</fieldset>
+<fieldset>
+  <legend>When are you available?</legend>
+  @repeat(acceptanceForm("availabilities")) { availability =>
+  <input type="hidden" name="@availability("date").name" value="@availability("date").value">
+  @checkbox(availability("available"), '_label -> availability("date").value)
+   }
+</fieldset>
+<fieldset>
+  <legend>Which Friday activity would you do?</legend>
+   @repeat(acceptanceForm("activities")) { activity =>
+   <input type="hidden" name="@activity("name").name" value="@activity("name").value">
+  @checkbox(activity("acceptable"), '_label -> activity("name").value)
   }
-  @repeat(acceptanceForm("activities")) { activity => 
-    <li>@checkbox(activity("acceptable"), '_label -> activity("name").value)</li>
-  }
-  <button type="submit" name="save" value="save">Save</button>
-  }
+</fieldset>
+<button type="submit" name="save" value="save">Save</button>
+}
 }
 

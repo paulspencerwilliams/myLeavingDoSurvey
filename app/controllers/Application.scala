@@ -13,7 +13,7 @@ object Application extends Controller {
 
   val acceptanceForm: Form[Acceptance]  = Form(
     mapping(
-      "name" -> text,
+      "name" -> text(minLength = 3, maxLength = 50),
       "availabilities" -> seq(
           mapping(
             "date" -> text,
@@ -35,14 +35,13 @@ object Application extends Controller {
   def index = Action {
     val blankAcceptance = Acceptance("",
       availabilities = List(
-        Availability("30th Jan (evening)", false),
-        Availability("31st Jan (evening)", false),
-        Availability("6th Jan (afternoon)", false),
-        Availability("6th Jan (evening)", false)
+        Availability("Thur 30th Jan (evening)", false),
+        Availability("Fri 31st Jan (evening)", false),
+        Availability("Fri 7th Jan (afternoon)", false),
+        Availability("Fri 7th Jan (evening)", false)
       ),
       activities = List(
         Activity("Mountain biking", false),
-        Activity("Tobogganing", false),
         Activity("Go karting", false)
       )
     )
@@ -54,13 +53,18 @@ object Application extends Controller {
       formWithErrors => BadRequest(views.html.acceptanceform(formWithErrors)), 
       value => {
         Acceptance.create(value)
-        Redirect(routes.Application.cheers)
+
+        Redirect(routes.Application.cheers).withSession("name" -> value.name)
       }
     )
   }
 
-  def cheers = Action {
-    Ok(views.html.cheers())
+  def cheers = Action { implicit request =>
+    session.get("name").map { name =>
+      Ok(views.html.cheers(name))
+    }.getOrElse {
+      Ok(views.html.cheers("Not set"))
+    }
   }
 
 }

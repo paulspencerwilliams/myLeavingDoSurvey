@@ -3,6 +3,12 @@ jdk:
 - openjdk6
 scala:
 - 2.10.3
+services:
+- postgresql
+env
+- DATABASE_URL=postgres://myleavingapp:myleavingapp@localhost/myleavingapp
+before_script:
+- psql -c 'create database myleavingdo;' -U postgres
 script: sbt test
 deploy:
   provider: heroku

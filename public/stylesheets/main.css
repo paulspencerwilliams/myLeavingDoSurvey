@@ -35,6 +35,11 @@ h1 {
   margin-bottom: 10px;
 }
 
+form p {
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+}
+
 form, h1, p {
   background: #9cbc2c;
   -moz-border-radius: 5px;
@@ -43,12 +48,19 @@ form, h1, p {
   border-radius: 5px;
   counter-reset: fieldsets;
   padding: 20px;
+}
+
+form, h1, div>p {
   width: 400px;
+}
+
+form p {
+  margin: 1em;
 }
 
 form fieldset {
   border: none;
-  margin-bottom: 10px;
+  margin-bottom: 2em;
 }
 
 form fieldset:last-of-type {
@@ -60,7 +72,7 @@ legend, h1, dd.error {
 }
 
 form legend {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   padding-bottom: 10px;
   text-shadow: 0 1px 1px #c0d576;
@@ -169,6 +181,7 @@ form button {
   font: 18px Georgia, "Times New Roman", Times, serif;
   letter-spacing: 1px;
   margin: auto;
+  margin-top: 2em;
   padding: 7px 25px;
   text-shadow: 0 1px 1px #000000;
   text-transform: uppercase;

@@ -7,6 +7,7 @@
 </fieldset>
 <fieldset>
   <legend>When are you available?</legend>
+  <p>Maybe it's Thursday, maybe Friday (especially if peeps want / are availble for an activity in the afternoon</p>
   @repeat(acceptanceForm("availabilities")) { availability =>
   <input type="hidden" name="@availability("date").name" value="@availability("date").value">
   @checkbox(availability("available"), '_label -> availability("date").value)
@@ -14,6 +15,7 @@
 </fieldset>
 <fieldset>
   <legend>Which Friday activity would you do?</legend>
+  <p>Oh, the weather's been bad, but surely it will be nice end of the month. Not even sure if paintballing's available but let's see who's interested</p>
    @repeat(acceptanceForm("activities")) { activity =>
    <input type="hidden" name="@activity("name").name" value="@activity("name").value">
   @checkbox(activity("acceptable"), '_label -> activity("name").value)

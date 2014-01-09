@@ -6,7 +6,6 @@ import play.api.data.Forms._
 
 import models.Acceptance
 import models.Availability
-import models.Activity
 
 
 object Application extends Controller {
@@ -20,13 +19,6 @@ object Application extends Controller {
             "available" -> boolean
           )
           (Availability.apply)(Availability.unapply)
-        ),
-      "activities" -> seq(
-          mapping(
-            "name" -> text,
-            "acceptable" -> boolean
-          )
-          (Activity.apply)(Activity.unapply)
         )
       )
       (Acceptance.apply)(Acceptance.unapply)
@@ -35,14 +27,9 @@ object Application extends Controller {
   def index = Action {
     val blankAcceptance = Acceptance("",
       availabilities = List(
-        Availability("Thur 30th Jan (evening)", false),
-        Availability("Fri 31st Jan (evening)", false),
-        Availability("Fri 7th Jan (afternoon)", false),
-        Availability("Fri 7th Jan (evening)", false)
-      ),
-      activities = List(
-        Activity("Mountain biking", false),
-        Activity("Go karting", false)
+        Availability("Thur 30th Jan", false),
+        Availability("Fri 31st Jan", false),
+        Availability("Fri 7th Jan", false)
       )
     )
     Ok(views.html.acceptanceform(acceptanceForm.fill(blankAcceptance)))

@@ -7,11 +7,9 @@ import anorm.SqlParser._
 
 case class Acceptance(
   name: String,
-  availabilities: Seq[Availability], 
-  activities: Seq[Activity]) 
+  availabilities: Seq[Availability]) 
 
 case class Availability(date: String, available: Boolean)
-case class Activity(name: String, acceptable: Boolean)
 
 object Acceptance {
   def create(acceptance: Acceptance) {
@@ -22,11 +20,6 @@ object Acceptance {
       acceptance.availabilities.foreach(availability =>
           SQL("insert into availabilities (date, available) values ({date},{available})")
               .on('date ->availability.date,'available ->availability.available)
-            .executeInsert() 
-        )
-      acceptance.activities.foreach(activity =>
-          SQL("insert into activities (name, acceptable) values ({name},{acceptable})")
-              .on('name ->activity.name,'acceptable ->activity.acceptable)
             .executeInsert() 
         )
     }
